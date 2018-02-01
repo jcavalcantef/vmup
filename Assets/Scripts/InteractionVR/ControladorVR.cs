@@ -8,6 +8,18 @@ namespace VMUP.InteractionVR
 {
     public class ControladorVR : MonoBehaviour
     {
+        public Canvas ventiladorCanvas;
+
+        public GameObject plane;
+        public GameObject plane2;
+
+        public Material skybox1;
+        public Material skybox2;
+
+        public Text h2otxt;
+
+        public int h2oLevel = 50;
+
         // comprimento do raio que colide com objetos
         public float rayLength = 100f;
         
@@ -53,6 +65,8 @@ namespace VMUP.InteractionVR
             //cria um raio que tem origem na posicao da camera e se estende no eixo z da camera (frente)
             Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
 
+            Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward, Color.yellow, rayLength);
+
             // se atinge um objeto interativo na cena...
             if (Physics.Raycast(ray, out hit, rayLength))
             {
@@ -66,7 +80,15 @@ namespace VMUP.InteractionVR
                     rectile.DOColor(Color.cyan, 1f);
 
                     //desenha na cena um raio para debug
-                    Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward, Color.yellow, rayLength);
+                    
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        RenderSettings.skybox = skybox2;
+                        plane.SetActive(false);
+                        ventiladorCanvas.enabled = true;
+                        h2oLevel++;
+                        h2otxt.text = h2oLevel.ToString();
+                    }
                 }
             }
 
