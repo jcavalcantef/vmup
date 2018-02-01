@@ -26,6 +26,8 @@ namespace VMUP.InteractionVR
         // variavel guarda o objeto que e atingido pelo raycast
         private RaycastHit hit;
 
+        private InteractiveObject currentObject;
+
         // referencia para a camera principal na cena
         public Camera mainCamera;
 
@@ -73,6 +75,10 @@ namespace VMUP.InteractionVR
                 //se este objeto e um objeto interativo...
                 if (hit.collider.tag.Equals("Object"))
                 {
+                    Debug.Log(hit.collider.gameObject.name);
+
+                    currentObject = hit.collider.GetComponent<InteractiveObject>();
+
                     // anima a escala do ponto
                     rectile.rectTransform.DOSizeDelta(rectileInteractionSize,1f);
 
@@ -83,16 +89,13 @@ namespace VMUP.InteractionVR
                     
                     if (Input.GetMouseButtonDown(0))
                     {
-                        RenderSettings.skybox = skybox2;
-                        plane.SetActive(false);
-                        ventiladorCanvas.enabled = true;
-                        if(podeAumentar(h2oLevel))
-                            h2oLevel++;
-                        h2otxt.text = h2oLevel.ToString();
+                        currentObject.OnClick();
                     }
+
+                    currentObject.OnHover();
                 }
             }
-
+                
             // quando nao esta colidindo com objetivos interativos...
             else
             {
@@ -101,11 +104,9 @@ namespace VMUP.InteractionVR
 
                 // retorna a cor padrao do objeto alvo
                 rectile.DOColor(Color.white, 1f);
+
+                currentObject.Exit();
             }
-        }
-        public bool podeAumentar(int num)
-        {
-            return (num < 100);
         }
     }
 }
