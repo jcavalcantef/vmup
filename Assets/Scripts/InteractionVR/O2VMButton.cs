@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class O2VMButton : InteractiveObject
 {
+    public static O2VMButton instance;
+
+    public Canvas thisCanvas;
+    public Canvas optionsCanvas;
+
+    public BoxCollider[] optionColliders;
+
     public InteractiveObject interactiveObject
     {
         get
@@ -35,8 +42,14 @@ public class O2VMButton : InteractiveObject
         interactiveObject.OnExit += HidePercentages;
     }
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
 		
 	}
 	
@@ -47,7 +60,10 @@ public class O2VMButton : InteractiveObject
 
     void OpenO2Percentages()
     {
+        optionsCanvas.enabled = true;
+        thisCanvas.enabled = false;
 
+        EnableColliders();
     }
 
     void HidePercentages()
@@ -58,5 +74,17 @@ public class O2VMButton : InteractiveObject
     void FocusArea()
     {
 
+    }
+
+    public void DisableColliders()
+    {
+        foreach (BoxCollider col in optionColliders)
+            col.enabled = false;
+    }
+
+    void EnableColliders()
+    {
+        foreach (BoxCollider col in optionColliders)
+            col.enabled = true;
     }
 }
