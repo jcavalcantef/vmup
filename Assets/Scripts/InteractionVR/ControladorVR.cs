@@ -105,7 +105,8 @@ namespace VMUP.InteractionVR
                 // retorna a cor padrao do objeto alvo
                 rectile.DOColor(Color.white, 1f);
 
-                currentObject.Exit();
+                if (currentObject != null)
+                    currentObject.Exit();
             }
         }
     }
