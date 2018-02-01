@@ -8,3 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sala.unity
     guid: e286ca2b91aae174f82aa585fe7d75ed
+  - enabled: 1
+    path: Assets/Scenes/Instrucoes.unity
+    guid: de1ff5b861b165045acb1ad00fa3d593
