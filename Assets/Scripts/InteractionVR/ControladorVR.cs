@@ -86,7 +86,8 @@ namespace VMUP.InteractionVR
                         RenderSettings.skybox = skybox2;
                         plane.SetActive(false);
                         ventiladorCanvas.enabled = true;
-                        h2oLevel++;
+                        if(podeAumentar(h2oLevel))
+                            h2oLevel++;
                         h2otxt.text = h2oLevel.ToString();
                     }
                 }
@@ -102,7 +103,9 @@ namespace VMUP.InteractionVR
                 rectile.DOColor(Color.white, 1f);
             }
         }
+        public bool podeAumentar(int num)
+        {
+            return (num < 100);
+        }
     }
 }
-
-
