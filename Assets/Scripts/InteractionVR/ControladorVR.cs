@@ -26,7 +26,7 @@ namespace VMUP.InteractionVR
         // variavel guarda o objeto que e atingido pelo raycast
         private RaycastHit hit;
 
-        private InteractiveObject currentObject;
+        public InteractiveObject currentObject;
 
         // referencia para a camera principal na cena
         public Camera mainCamera;
