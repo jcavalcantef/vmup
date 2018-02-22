@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VMUP.CameraFade;
+using VMUP.Scenes;
 
 public class mudaCena : InteractiveObject
 {
@@ -48,6 +50,11 @@ public class mudaCena : InteractiveObject
 
     public void muda()
     {
-        SceneManager.LoadScene("Sala");
+        CameraFade.instance.CameraFadesOutFollowFadeInExternal(LoadScene);
+    }
+
+    void LoadScene()
+    {
+        SceneManager.LoadScene(Instructions.instance.nextScene);
     }
 }
