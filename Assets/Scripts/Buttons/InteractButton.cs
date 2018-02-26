@@ -5,13 +5,17 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using VMUP.Scenes;
+using VMUP.Panels;
 
 namespace VMUP.Buttons
 {
     public class InteractButton : ButtonInteraction
     {
         public Transform panelTransform;
-        public GameObject vmPanel;
+        public Panel vmPanel;
+        public Panel monitorParam;
+
+        public GameObject cleanGO;
 
         new void OnEnable()
         {
@@ -22,7 +26,14 @@ namespace VMUP.Buttons
 
         public void Interact()
         {
-            vmPanel = Instantiate(vmPanel, panelTransform.position, Quaternion.identity) as GameObject;
+            vmPanel = Instantiate(vmPanel, vmPanel.transform.position, Quaternion.identity) as Panel;
+            vmPanel.transform.position = panelTransform.position;
+            vmPanel.Show();
+
+            monitorParam = Instantiate(monitorParam, monitorParam.transform.position, monitorParam.transform.rotation) as Panel;
+            monitorParam.Show();
+
+            Destroy(cleanGO);
         }
     }
 }

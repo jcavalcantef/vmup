@@ -42,8 +42,6 @@ namespace VMUP.Buttons
         void Click()
         {
             Debug.Log("Clicked");
-
-            Destroy(this.gameObject);
         }
 
         void Focus()

@@ -35,7 +35,7 @@ namespace VMUP.CameraFade
         void Start () 
 		{
             // Every scene starts the camera fading in
-            //CameraFadeIn();
+            CameraFadeIn();
 
             //CameraFadeOut();
 
