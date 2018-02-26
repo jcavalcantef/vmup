@@ -50,7 +50,9 @@ public class mudaCena : InteractiveObject
 
     public void muda()
     {
-        CameraFade.instance.CameraFadesOutFollowFadeInExternal(LoadScene);
+        SceneManager.LoadScene(Instructions.instance.nextScene);
+
+        //CameraFade.instance.CameraFadesOutFollowFadeInExternal(LoadScene);
     }
 
     void LoadScene()

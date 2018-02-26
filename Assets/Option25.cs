@@ -55,8 +55,6 @@ public class Option25: InteractiveObject
         vmCanvas.enabled = true;
 
         answerValue.text = valueText.text;
-
-        O2VMButton.instance.DisableColliders();
     }
 
     void Focus()

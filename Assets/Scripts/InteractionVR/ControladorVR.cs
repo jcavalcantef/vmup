@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.XR;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -8,18 +9,6 @@ namespace VMUP.InteractionVR
 {
     public class ControladorVR : MonoBehaviour
     {
-        public Canvas ventiladorCanvas;
-
-        public GameObject plane;
-        public GameObject plane2;
-
-        public Material skybox1;
-        public Material skybox2;
-
-        public Text h2otxt;
-
-        public int h2oLevel = 50;
-
         // comprimento do raio que colide com objetos
         public float rayLength = 100f;
         
@@ -29,7 +18,13 @@ namespace VMUP.InteractionVR
         public InteractiveObject currentObject;
 
         // referencia para a camera principal na cena
-        public Camera mainCamera;
+        public Camera mainCamera
+        {
+            get
+            {
+                return Camera.main;
+            }
+        }
 
         // imagem que representa o ponto que interage com os objetos
         public Image rectile;
@@ -49,7 +44,11 @@ namespace VMUP.InteractionVR
         //inicializa o objeto MonoBehaviour
         void Start()
         {
+            UnityEngine.XR.InputTracking.Recenter();
 
+#if UNITY_WSA
+    Debug.Log("Stand Alone OSX");
+#endif
         }
 
         // executa em todos os frames 
@@ -65,13 +64,13 @@ namespace VMUP.InteractionVR
         void Interact()
         {
             //cria um raio que tem origem na posicao da camera e se estende no eixo z da camera (frente)
-            Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
-
-            Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward, Color.yellow, rayLength);
+            Ray ray = new Ray(rectile.rectTransform.position, rectile.rectTransform.forward);
 
             // se atinge um objeto interativo na cena...
             if (Physics.Raycast(ray, out hit, rayLength))
             {
+                Debug.DrawRay(rectile.rectTransform.position, rectile.rectTransform.forward, Color.yellow, rayLength);
+
                 //se este objeto e um objeto interativo...
                 if (hit.collider.tag.Equals("Object"))
                 {
@@ -85,14 +84,25 @@ namespace VMUP.InteractionVR
                     // torna-se o objeto alvo vermelho
                     rectile.DOColor(Color.cyan, 1f);
 
-                    //desenha na cena um raio para debug
-                    
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        currentObject.OnClick();
-                    }
+                    //Input para Gear VR (Android)
 
-                    currentObject.OnHover();
+//#if UNITY_ANDROID || UNITY_EDITOR
+                    if (Input.GetMouseButtonDown(0))
+//#endif
+
+                    //Input para dispositivo Windows Mixed Reality 
+
+//#if UNITY_WSA
+//                   if (Input.GetAxis("LeftTrigger") == 1.0f)             
+//#endif
+                    {
+                        if (currentObject != null)
+                            currentObject.OnClick();
+                    }
+                    Debug.Log(Input.GetAxis("LeftTrigger"));
+
+                    if (currentObject != null)
+                        currentObject.OnHover();
                 }
             }
                 
