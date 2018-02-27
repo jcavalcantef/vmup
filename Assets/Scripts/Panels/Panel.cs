@@ -17,6 +17,11 @@ namespace VMUP.Panels
 
         public BoxCollider[] colliders;
 
+        private void OnEnable()
+        {
+            Close();
+        }
+
         public void Show()
         {
             panelCanvas.enabled = true;

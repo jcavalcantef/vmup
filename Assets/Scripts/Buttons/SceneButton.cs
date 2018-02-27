@@ -10,11 +10,13 @@ namespace VMUP.Buttons
 {
     public class SceneButton : ButtonInteraction
     {
+        public string nextScene;
+
         private void Awake()
         {
         }
 
-        void OnEnable()
+        new void OnEnable()
         {
             base.OnEnable();
             interactiveObject.OnClicked += LoadScene;
@@ -22,7 +24,7 @@ namespace VMUP.Buttons
 
         public void LoadScene()
         {
-            SceneManager.LoadScene(Instructions.instance.nextScene);
+            SceneManager.LoadScene(nextScene);
 
             //CameraFade.instance.CameraFadesOutFollowFadeInExternal(LoadScene);
         }

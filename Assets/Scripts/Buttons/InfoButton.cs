@@ -27,8 +27,6 @@ namespace VMUP.Buttons
 
         public void Interact()
         {
-            infoPanel = Instantiate(infoPanel, infoPanel.transform.position, Quaternion.identity) as Panel;
-            infoPanel.transform.position = panelTransform.position;
             infoPanel.Show();
 
             parent.Close();

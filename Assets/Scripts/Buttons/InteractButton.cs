@@ -6,6 +6,7 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 using VMUP.Scenes;
 using VMUP.Panels;
+using System;
 
 namespace VMUP.Buttons
 {
@@ -17,22 +18,31 @@ namespace VMUP.Buttons
 
         public GameObject cleanGO;
 
+        public AudioSource audioSource;
+
+        public event Action OnPlaySoundFinishes;
+
         new void OnEnable()
         {
             base.OnEnable();
+
+            OnPlaySoundFinishes += DeleteButton;
 
             interactiveObject.OnClicked += Interact;
         }
 
         public void Interact()
         {
-            vmPanel = Instantiate(vmPanel, vmPanel.transform.position, Quaternion.identity) as Panel;
-            vmPanel.transform.position = panelTransform.position;
             vmPanel.Show();
-
-            monitorParam = Instantiate(monitorParam, monitorParam.transform.position, monitorParam.transform.rotation) as Panel;
             monitorParam.Show();
 
+            audioSource.Play();
+
+            Invoke("DeleteButton", audioSource.clip.length);
+        }
+
+        void DeleteButton()
+        {
             Destroy(cleanGO);
         }
     }
