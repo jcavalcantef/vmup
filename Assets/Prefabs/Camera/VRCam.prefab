@@ -45,7 +45,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1550830454748192
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,8 +106,8 @@ Camera:
   m_GameObject: {fileID: 1550830454748192}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.7205882, g: 0.7205882, b: 0.7205882, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0.7058824}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camPanel: {fileID: 224205546747932798}
-  startColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 0, g: 0, b: 0, a: 1}
   endColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114313022749828822
 MonoBehaviour:
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1550830454748192}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92e5ac6f2c2fbd241b7e2ebc62d8d8c8, type: 3}
   m_Name: 
@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayLength: 2000
+  cam: {fileID: 4832026106937124}
   currentObject: {fileID: 0}
   rectile: {fileID: 114952170363228772}
   target: {fileID: 0}

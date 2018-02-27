@@ -11,6 +11,8 @@ namespace VMUP.InteractionVR
     {
         // comprimento do raio que colide com objetos
         public float rayLength = 100f;
+
+        public Transform cam;
         
         // variavel guarda o objeto que e atingido pelo raycast
         private RaycastHit hit;
@@ -64,19 +66,19 @@ namespace VMUP.InteractionVR
         void Interact()
         {
             //cria um raio que tem origem na posicao da camera e se estende no eixo z da camera (frente)
-            Ray ray = new Ray(rectile.rectTransform.position, rectile.rectTransform.forward);
+            Ray ray = new Ray(cam.position, cam.forward);
 
             // se atinge um objeto interativo na cena...
             if (Physics.Raycast(ray, out hit, rayLength))
             {
-                Debug.DrawRay(rectile.rectTransform.position, rectile.rectTransform.forward, Color.yellow, rayLength);
+                Debug.DrawRay(cam.position, cam.forward, Color.yellow, rayLength);
 
                 //se este objeto e um objeto interativo...
                 if (hit.collider.tag.Equals("Object"))
                 {
-                    Debug.Log(hit.collider.gameObject.name);
-
                     currentObject = hit.collider.GetComponent<InteractiveObject>();
+
+                    Debug.Log(hit.collider.gameObject.name);
 
                     // anima a escala do ponto
                     rectile.rectTransform.DOSizeDelta(rectileInteractionSize,1f);
@@ -86,20 +88,11 @@ namespace VMUP.InteractionVR
 
                     //Input para Gear VR (Android)
 
-//#if UNITY_ANDROID || UNITY_EDITOR
                     if (Input.GetMouseButtonDown(0))
-//#endif
-
-                    //Input para dispositivo Windows Mixed Reality 
-
-//#if UNITY_WSA
-//                   if (Input.GetAxis("LeftTrigger") == 1.0f)             
-//#endif
                     {
                         if (currentObject != null)
                             currentObject.OnClick();
                     }
-                    Debug.Log(Input.GetAxis("LeftTrigger"));
 
                     if (currentObject != null)
                         currentObject.OnHover();

@@ -40,5 +40,7 @@ public class OptionButton : ButtonInteraction
 
         if (!audioSource.isPlaying)
             audioSource.Play();
+
+        MonitorMultiParametrico.instance.UpdateOxygenSaturation();
     }
 }

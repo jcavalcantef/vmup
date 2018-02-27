@@ -36,6 +36,7 @@ namespace VMUP.Buttons
             vmPanel.Show();
             monitorParam.Show();
 
+            VentiladorMecanico.instance.TurnOn();
             audioSource.Play();
 
             Invoke("DeleteButton", audioSource.clip.length);
