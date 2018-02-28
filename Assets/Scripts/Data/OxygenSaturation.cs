@@ -24,21 +24,25 @@ public class OxygenSaturation
 
     public string getSaturation(int concentracaoO2, int PEEP)
     {
-        bool   condition1   = (concentracaoO2 >= 31f) && (concentracaoO2 <= 50f);
-        bool   condition2   = (PEEP >= 3) && (PEEP <= 5);
+        bool condition1 = (concentracaoO2 >= 50f) && (concentracaoO2 <= 80f);
+        bool condition2 = (PEEP >= 3) && (PEEP <= 5);
+        bool condition3 = PEEP <= 2;
 
-        if (condition1 && condition2)
-        {
-            this.spO2 = 97;
-            isWithinNormalCondition = true;
-        }
-            
-        else if(condition1 || condition2)
+        if (condition1 ^ condition2 && !condition3)
         {
             this.spO2 = 93;
             isWithinNormalCondition = false;
         }
-            
+        else if (condition1 && condition2)
+        {
+            this.spO2 = 97;
+            isWithinNormalCondition = true;
+        }
+        else if (condition3)
+        {
+            this.spO2 = 91;
+            isWithinNormalCondition = false;
+        }
 
         return (this.spO2.ToString());
     }
